@@ -3,42 +3,47 @@ package com.generation.lojagames.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import org.hibernate.annotations.UpdateTimestamp;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
-	@Entity
-	@Table(name = "tb_produtos")
-	public class Produto {
-	@Id 
+@Entity
+@Table(name = "tb_produto") 
+public class Produto {
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+    
+	@NotNull(message = "O Atributo nome é obrigatório!") 
+	private String nome;
+
+	@NotBlank(message = "O Atributo descricao é obrigatório!") 
+    @Size(max = 1000, message = "O atributo descricao deve ter no máximo 1000 de caracteres.")
+	private String descricao;
+
+	@NotNull(message = "O Atributo preço é obrigatório!") 
+	@Positive
+	private BigDecimal preco;
+
+	private LocalDate dataLancamento;
 	
-	@NotBlank(message = "O atributo Nome é obrigatório!")
-	private  String nome;
-	
-	  @NotBlank(message = "O atributo Descrição é obrigatório!")
-	    @Size(max = 1000, message = "O atributo descrição deve ter no máximo 1000 caracteres.")
-	private  String descricao;
-	
-	  
-	  @NotNull
-	  @PositiveOrZero
-	private  BigDecimal preco;
-	
-	  @UpdateTimestamp
-	private LocalDate datelancamentoO;
-	
-	  @Size
+    @Size(max = 1000, message = "O atributo foto deve ter no máximo 1000 de caracteres.")
 	private String foto;
+    
+    @ManyToOne 
+    @JsonIgnoreProperties("produtos")
+	private Categoria categoria;
+
 
 	public Long getId() {
 		return id;
@@ -72,12 +77,12 @@ import jakarta.validation.constraints.Size;
 		this.preco = preco;
 	}
 
-	public LocalDate getDatelancamentoO() {
-		return datelancamentoO;
+	public LocalDate getDataLancamento() {
+		return dataLancamento;
 	}
 
-	public void setDatelancamentoO(LocalDate datelancamentoO) {
-		this.datelancamentoO = datelancamentoO;
+	public void setDataLancamento(LocalDate dataLancamento) {
+		this.dataLancamento = dataLancamento;
 	}
 
 	public String getFoto() {
@@ -87,4 +92,15 @@ import jakarta.validation.constraints.Size;
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	
+
 }
