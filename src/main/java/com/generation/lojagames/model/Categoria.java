@@ -1,4 +1,4 @@
-package com.generation.lojagames.model;
+ package com.generation.lojagames.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,42 +8,42 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-	@Entity
-	@Table(name = "tb_categoria")
+@Entity
+@Table(name = "tb_categoria")
 public class Categoria {
 
-		@Id 
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private Long id;
-		
-		@NotBlank(message = "O atributo Genêro é obrigatório!")
-		private  String nome;
-		
-		  @NotBlank(message = "O atributo Genero é obrigatório!")
-		    @Size(max = 1000, message = "O atributo Genero deve ter no máximo 1000 caracteres.")
-		private  String genero;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-		public Long getId() {
-			return id;
-		}
+	@NotBlank(message = "O atributo Genêro é obrigatório!")
+	private String nome;
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	@NotBlank(message = "O atributo Genero é obrigatório!")
+	@Size(max = 1000, message = "O atributo Genero deve ter no máximo 1000 caracteres.")
+	private String genero;
 
-		public String getNome() {
-			return nome;
-		}
+	public Long getId() {
+		return id;
+	}
 
-		public void setNome(String nome) {
-			this.nome = nome;
-		}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-		public String getGenero() {
-			return genero;
-		}
+	public String getNome() {
+		return nome;
+	}
 
-		public void setGenero(String genero) {
-			this.genero = genero;
-		}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
 }

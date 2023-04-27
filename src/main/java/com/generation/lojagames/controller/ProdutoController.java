@@ -54,7 +54,7 @@ public class ProdutoController {
 		return ResponseEntity.ok(produtoRepository.findAllByNomeContainingIgnoreCase(nome));
 }
 	@PostMapping
-	public ResponseEntity<Produto> post(@Valid @RequestBody Produto produto){
+	public ResponseEntity<Produto> postProduto(@Valid @RequestBody Produto produto){
 		return categoriaRepository.findById(produto.getCategoria().getId())
 				.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(produtoRepository.save(produto)))
 				.orElse(ResponseEntity.badRequest().build());
